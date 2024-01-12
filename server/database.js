@@ -300,7 +300,7 @@ class Database {
         }
 
         // Set to utf8mb4 for MariaDB
-        if (dbConfig.type.endsWith("mariadb")) {
+        if (dbConfig.type.endsWith("mariadb") && process.env.UPTIME_KUMA_DB_SET_CHARSET !== "false") {
             config.pool = {
                 afterCreate(conn, done) {
                     conn.query("SET CHARACTER SET utf8mb4;", (err) => done(err, conn));
